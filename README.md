@@ -13,27 +13,7 @@ Exploratory analysis of FoodHub order data to understand demand, restaurant perf
 - Order cost shows only a weak relationship with fulfillment time; cuisine mix matters more for revenue opportunity.
 - Among restaurants with >50 ratings and average rating >4: **The Meatball Shop, Blue Ribbon Fried Chicken, Shake Shack, and Blue Ribbon Sushi**.
 
-## Key visuals
 
-### Orders by cuisine
-
-![Orders by cuisine type](reports/figures/cuisine_demand.png)
-
-### Top restaurants by volume
-
-![Top 10 restaurants by order count](reports/figures/top_restaurants.png)
-
-### Weekend vs weekday demand
-
-![Orders by day of the week](reports/figures/orders_by_day.png)
-
-### Delivery time by day type
-
-![Delivery time by day of the week](reports/figures/delivery_time_by_day.png)
-
-### Numerical correlations
-
-![Correlation heatmap of numerical variables](reports/figures/correlation_heatmap.png)
 
 ## Project layout
 
