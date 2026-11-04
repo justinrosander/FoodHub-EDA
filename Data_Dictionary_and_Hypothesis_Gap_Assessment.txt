@@ -1,0 +1,109 @@
+Data Dictionary and Hypothesis Gap Assessment
+
+Dataset reviewed
+- File: data/raw/foodhub_order.csv
+- Number of records: 1,898
+- Number of fields: 9
+- Missing values: No blank or null values were found in the file. Note that the `rating` field uses `Not given` as a business value for unrated orders rather than a missing value.
+
+Data Dictionary
+
+1. order_id
+- Type: Integer identifier
+- Description: Unique identifier for each food order.
+- Role in analysis: Primary order-level key.
+
+2. customer_id
+- Type: Integer identifier
+- Description: Unique identifier for the customer who placed the order.
+- Role in analysis: Useful for repeat-customer analysis and customer-level behavior.
+
+3. restaurant_name
+- Type: Categorical text
+- Description: Name of the restaurant fulfilling the order.
+- Role in analysis: Used to measure restaurant demand, popularity, and restaurant-level performance.
+
+4. cuisine_type
+- Type: Categorical text
+- Description: Cuisine category associated with the restaurant or order, such as American, Japanese, or Italian.
+- Role in analysis: Used for demand segmentation and comparison across cuisine groups.
+
+5. cost_of_the_order
+- Type: Numeric, continuous
+- Description: Total dollar value of the order.
+- Observed range: 4.47 to 35.41
+- Role in analysis: Useful for revenue analysis, price segmentation, and order-value comparisons.
+
+6. day_of_the_week
+- Type: Categorical text
+- Description: Indicates whether the order was placed on a `Weekday` or `Weekend`.
+- Observed values: `Weekday`, `Weekend`
+- Role in analysis: Supports demand comparisons by day type.
+
+7. rating
+- Type: Ordinal categorical
+- Description: Customer-provided rating for the order. Unrated orders are labeled `Not given`.
+- Observed values: `3`, `4`, `5`, `Not given`
+- Role in analysis: Supports customer satisfaction analysis.
+- Important note: This field does not contain ratings of `1` or `2`, which limits the ability to study the full dissatisfaction spectrum.
+
+8. food_preparation_time
+- Type: Numeric, discrete
+- Description: Time in minutes taken by the restaurant to prepare the order after confirmation.
+- Observed range: 20 to 35
+- Average: 27.37
+- Role in analysis: Measures restaurant operational efficiency and contributes to total fulfillment time.
+
+9. delivery_time
+- Type: Numeric, discrete
+- Description: Time in minutes taken to deliver the order after pickup.
+- Observed range: 15 to 33
+- Average: 24.16
+- Role in analysis: Measures delivery efficiency.
+
+Derived variables available from the dataset
+- Total fulfillment time = food_preparation_time + delivery_time
+- Restaurant order volume = count of orders by restaurant_name
+- Cuisine demand by day type = count of orders by cuisine_type and day_of_the_week
+- Rating rate = proportion of orders where rating is not `Not given`
+
+Hypothesis Sufficiency Assessment
+
+Hypothesis 1
+- Statement: Restaurants with higher order volumes tend to have longer average food preparation times.
+- Can this dataset test it?: Yes, with moderate confidence.
+- Why: The dataset includes `restaurant_name` and `food_preparation_time`, so order volume can be calculated per restaurant and compared with average preparation time.
+- Key limitation: The dataset does not include kitchen capacity, staffing levels, restaurant operating hours, or exact timestamps, so any observed relationship would be correlational rather than causal.
+
+Hypothesis 2
+- Statement: Orders with longer total fulfillment times are less likely to receive high customer ratings.
+- Can this dataset test it?: Partially.
+- Why: A total fulfillment time metric can be derived by adding `food_preparation_time` and `delivery_time`, and this can be compared against the available `rating` values.
+- Key limitations:
+- A large share of orders is unrated (`Not given`, 736 orders), which may bias results.
+- Ratings only appear as `3`, `4`, or `5`, with no `1` or `2` values, so the dataset does not capture the full range of low satisfaction.
+- The file does not include other satisfaction drivers such as food quality, order accuracy, packaging quality, customer expectations, delivery distance, or weather conditions.
+- Conclusion: The dataset is enough for a directional exploratory test, but not for a strong or complete validation of this hypothesis.
+
+Hypothesis 3
+- Statement: Demand patterns vary by day type, with weekends generating higher order volumes for certain cuisines and restaurants than weekdays.
+- Can this dataset test it?: Yes.
+- Why: The dataset includes `day_of_the_week`, `cuisine_type`, and `restaurant_name`, which are sufficient to compare weekday versus weekend order counts.
+- Key limitation: Day type is only captured at a high level as `Weekday` or `Weekend`; exact dates and specific weekdays are not available, so more granular temporal patterns cannot be tested.
+
+Gap Summary
+
+The available dataset is sufficient for exploratory analysis and for testing Hypotheses 1 and 3 reasonably well. Hypothesis 2 can only be tested partially because the rating data is incomplete and compressed into a narrow range of positive outcomes.
+
+Main data gaps
+- No exact order, confirmation, pickup, or delivery timestamps
+- No geographic information such as delivery distance or neighborhood
+- No operational variables such as staffing, restaurant capacity, or driver availability
+- No external context such as weather, holidays, or promotions
+- No low-end rating values (`1` or `2`) in the current file
+- Many unrated orders are encoded as `Not given`, reducing usable sample size for satisfaction analysis
+
+Recommendation
+- Proceed with EDA using this dataset for demand, timing, and high-level satisfaction patterns.
+- Treat all hypothesis testing as exploratory rather than causal.
+- If stronger validation is needed, collect timestamped operational data, fuller rating coverage, and contextual features such as distance, weather, and promotions.

@@ -1,0 +1,30 @@
+Problem Definition Document
+
+1. Business Context
+FoodHub is a food aggregator operating in New York that connects customers with multiple restaurants through a single mobile app. Customers place orders in the app, restaurants confirm and prepare the food, and FoodHub assigns delivery personnel to complete the delivery. Customers may also rate their orders after delivery. As the number of restaurants and customer orders grows, FoodHub wants to better understand order behavior, restaurant demand, delivery performance, and customer satisfaction so it can improve customer experience and support business growth.
+
+2. Project Objective
+The objective of this project is to analyze FoodHub's order data to identify patterns in customer demand, restaurant performance, delivery efficiency, and customer ratings. The analysis should generate insights that help FoodHub improve service quality, strengthen restaurant partnerships, and make better business decisions.
+
+3. Key Performance Indicators (KPIs)
+KPI 1: Average food preparation time
+Definition: The average time taken by restaurants to prepare food after an order is placed.
+Business value: Helps assess restaurant operational efficiency and its effect on total delivery experience.
+
+KPI 2: Average delivery time
+Definition: The average time taken to deliver an order after the food is picked up.
+Business value: Helps evaluate delivery efficiency and identify opportunities to reduce delays.
+
+KPI 3: Customer rating rate and average rating
+Definition: The percentage of orders that receive a rating and the average rating across rated orders.
+Business value: Helps measure customer satisfaction and understand service quality from the customer's perspective.
+
+4. Key Hypotheses
+Hypothesis 1: Restaurants with higher order volumes tend to have longer average food preparation times.
+Rationale: High demand may create operational bottlenecks in busy restaurants.
+
+Hypothesis 2: Orders with longer total fulfillment times are less likely to receive high customer ratings.
+Rationale: Delays in preparation or delivery may negatively affect customer satisfaction.
+
+Hypothesis 3: Demand patterns vary by day type, with weekends generating higher order volumes for certain cuisines and restaurants than weekdays.
+Rationale: Customer ordering behavior is likely influenced by weekly routines and lifestyle differences.
